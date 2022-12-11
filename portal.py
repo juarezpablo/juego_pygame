@@ -25,6 +25,9 @@ class Portal_meta:
         self.estado=1
 
    
+        self.colision_rect=self.rect
+        self.colision_rect.x=x+(self.rect.width/2)
+        self.colision_rect.width=50
 
 
 
@@ -34,10 +37,8 @@ class Portal_meta:
         self.image =self.animation[self.frame]
         
         screen.blit(self.image,self.rect)  
-        if(DEBUG):
-            pygame.draw.rect(screen,color=C_RED,rect=self.colision_rango_izquierda_player_rect)
-
-
+        if DEBUG:
+            pygame.draw.rect(screen,color=(255,255,0),rect=self.colision_rect)
 
     def do_animation(self,delta_ms):
         self.tiempo_transcurrido_animation += delta_ms

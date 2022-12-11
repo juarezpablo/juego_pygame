@@ -6,6 +6,8 @@ from proyectil import Bala
 
 from gui_widget import Widget
 from gui_barra_progreso import Barra_progresiva
+from gui_caja_texto import Caja_texto
+
 
 class Player:
     def __init__(self,x,y,speed_walk,speed_run,gravity,jump_power,frame_rate_ms,move_rate_ms,jump_height,p_scale=1,interval_time_jump=100,tablero=1) -> None:
@@ -72,11 +74,11 @@ class Player:
         self.terreno_colision_izquierda_rect=pygame.Rect(self.rect.x,y+5,5,self.rect.height-5)
         self.terreno_colision_derecha_rect=pygame.Rect(self.rect.x+self.collition_rect.width*2,y+5,5,self.rect.height-5)
         self.terreno_colision_izquierda_rect.x=self.rect.x+(self.collition_rect.width)
-        print(self.rect.width)
+       # print(self.rect.width)
 
        # self.lives=[]
         #self.lives=self.generate_lives(5)
-        self.vidas=3    
+        self.vidas=4    
 
         self.estado_player="sano"
         self.bandera_daño=0
@@ -87,9 +89,17 @@ class Player:
         self.tiempo_de_recarga=2000
         self.tiempo_desde_creacion=0
         self.bandera_recarga=0
+        self.score=0
+        self.score_label=Caja_texto(tablero,500,0,100,50,None,"SCORE","Verdana",C_BLUE_2,35)
+        self.score_value=Caja_texto(tablero,650,0,100,50,None,self.score,"Verdana",C_BLUE_2,35)
 
-        
+        self.tiempo_de_juego=0
+        self.label_tiempo=Caja_texto(tablero,720,0,100,50,None,"TIME:","Verdana",C_RED,35)
+        self.value_tiempo=Caja_texto(tablero,820,0,100,50,None,self.tiempo_de_juego,"Verdana",C_RED,35)
+
+    
     '''
+
     def generate_lives(self,cant):
         for i in range (cant):
             self.lives.append("coin")
@@ -256,7 +266,11 @@ class Player:
             else: 
                 self.frame = 0
  
-    def update(self,delta_ms,plataform_list):
+    def update(self,delta_ms,plataform_list,tablero_de_gestion):
+        if tablero_de_gestion.stage_1.active:
+            self.tiempo_de_juego=self.tiempo_de_juego+(delta_ms/1000)
+           # self.tiempo_de_juego=self.tiempo_de_juego/1000
+            self.tiempo_de_juego=round(self.tiempo_de_juego,2)
         self.do_movement(delta_ms,plataform_list)
         self.do_animation(delta_ms)
 
@@ -264,7 +278,10 @@ class Player:
 
         print("VIDAS: {0}".format(self.vidas))
 
-
+        self.score_label.update(delta_ms,"SCORE")
+        self.score_value.update(delta_ms,self.score)
+        self.value_tiempo.update(delta_ms,self.tiempo_de_juego)
+        self.label_tiempo.update(delta_ms,"TIME:")
 
     def descontar_vida(self,delta_ms):
         self.tiempo_danado=2500
@@ -303,6 +320,10 @@ class Player:
         
         self.barra_de_vida.draw()
 
+        self.score_label.draw()
+        self.score_value.draw()
+        self.label_tiempo.draw()
+        self.value_tiempo.draw()
     def events(self,delta_ms,keys):
         self.tiempo_transcurrido += delta_ms
 

@@ -20,7 +20,8 @@ class Bullet:
         self.direccion_de_bala=direccion_de_bala
         self.terreno_colision_rect=pygame.Rect(self.rect)
         self.terreno_colision_rect.x=self.rect.x
-        self.terreno_colision_rect.y=self.rect.y
+        self.terreno_colision_rect.y=self.rect.y+15
+        self.terreno_colision_rect.height=15
         self.estado_de_bala=estado_de_bala
         self.tiempo_transcurrido_animation = 0
         self.frame_rate_ms=100

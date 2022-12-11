@@ -38,14 +38,13 @@ class Barra_progresiva():
         self.rectangulo.y=self.y
         self.estado=estado
 
-
+     #   self.lista_puntos_a_imprimir=[]
 
 
     def render(self):
         self.surface=self.image
         #print(self.lista_image_punto)
-        
-
+       
             
 
     def do_increment(self,valor):
@@ -67,21 +66,29 @@ class Barra_progresiva():
         self.do_increment(valor)
         
        # self.lista_puntos=self.generar_coordenadas()
-        self.draw()
+    #    self.actualizar_puntos()
+
+  #  def actualizar_puntos(self):
+   #     for punto in self.lista_puntos:
+   #         if punto.estado==1:
+    #            self.lista_puntos_a_imprimir.append(punto)    
 
     def draw(self):
-
+        
      #   super().draw
-
-        for punto in self.lista_puntos:
-           # if puntos["estado"]==1:
-          #      self.surface.blit(puntos["imagen"],puntos["rectangulo"])
-
-            if punto.estado==1:
-                punto.draw()
-                print("IMpreSION DE VIDAS: rect.x={0}  vida.estado={1}".format(punto.x,punto.estado))
+        
+        
         self.master_surface.blit(self.surface,self.rectangulo)
-        #super().draw
+        for punto in self.lista_puntos:
+         
+            if punto.estado==1:
+                punto.rectangulo.x=punto.x+self.rectangulo.x
+                punto.rectangulo.y=punto.y+self.rectangulo.y
+                self.master_surface.blit(punto.surface,punto.rectangulo)
+              #  self.master_surface.blit(self.surface,self.rectangulo)
+              #  print("PUNTOS_ESTADO_1".format(punto.estado))
+                print("IMpreSION DE VIDAS: rect.x={0}  vida.estado={1}".format(punto.x,punto.estado))
+       
 
     def generar_coordenadas(self):
         lista_puntos=[]

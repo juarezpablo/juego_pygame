@@ -13,6 +13,7 @@ class Widget:
         #self.surface=pygame.surface.Surface((self.width,self.height))
         
         self.surface_2=pygame.image.load(imagen_background)
+       
         self.surface_3=pygame.surface.Surface((self.width,self.height))
         self.surface=self.surface_2
         self.rectangulo=self.surface.get_rect()

@@ -13,11 +13,13 @@ from formulario_inicio import Formulario_inicio
 from formulario_nivel import Formulario_level
 from formulario_nivel_1 import Formulario_level_1
 class Tablero:
-    def __init__(self,flags) :
+    def __init__(self,flags,master_surface) :
         self.path_nivel_1="C:/Users/Pablo/Desktop/ProgramacionI/game_eventual/niveles_json/nivel_1.json"
-        self.screen= pygame.display.set_mode((ANCHO_VENTANA,ALTO_VENTANA), flags, 16)
-        self.stage_1=Nivel(10,self.path_nivel_1,2,self.screen)
-        
+        self.path_nivel_2="C:/Users/Pablo/Desktop/ProgramacionI/game_eventual/niveles_json/nivel_2.json"
+        self.master_surface=master_surface
+    #    self.screen=pygame.surface.Surface((ANCHO_VENTANA,ALTO_VENTANA))
+        self.stage_1=Nivel(10,self.path_nivel_1,2,1,self.master_surface,False)
+        self.stage_2=Nivel(10,self.path_nivel_2,2,2,self.master_surface,False)
 #        self.formulario_menu=Formulario_inicio("form_menu",self.screen,0,0,ANCHO_VENTANA,ALTO_VENTANA,None,1,PATH_IMAGE+"locations/set_bg_05/1_game_background/1_game_background.png",True)
 
  #       self.formulario_seleccion_nivel=Formulario_level("form_level_select",self.screen,0,0,ANCHO_VENTANA,ALTO_VENTANA,None,1,PATH_IMAGE+"locations/set_bg_05/1_game_background/1_game_background.png",False,self.path_nivel_1)
@@ -35,15 +37,15 @@ class Tablero:
             self.form_level_1.draw()  
     '''
     def update(self,delta_ms,player_1,lista_eventos):
-        self.stage_1.update(delta_ms,player_1.municion_list,player_1)
+      #  self.stage_1.update(delta_ms,player_1.municion_list,player_1)
     #   self.gestionar_forms(delta_ms,player_1,lista_eventos)
-
+        pass
     def draw(self,player_1,delta_ms):
         #screen.blit(stage_1.imagen_fondo,stage_1.rect)
-
+        pass
        
-        self.screen.blit(self.stage_1.imagen_fondo,self.stage_1.rect)
+       
     
-        self.stage_1.draw(self.screen,player_1.municion_list)
+      #  self.stage_1.draw(self.screen,player_1.municion_list)
 
     

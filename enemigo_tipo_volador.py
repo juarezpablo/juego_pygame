@@ -27,7 +27,7 @@ class Enemigo_volador:
         self.terreno_colision_derecha_rect=pygame.Rect(self.rect.x+self.rect.width,y,5,self.rect.height)
        # self.terreno_colision_izquierda_rect.x=self.rect.x+(self.rect.width)
 
-
+        self.estado=1
 
 
     def draw(self,screen):

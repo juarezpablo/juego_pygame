@@ -9,7 +9,7 @@ class Formulario_inicio(Form):
         
        # self.surface=pygame.image.load(imagen_background)
    
-        self.boton_elegir_niveles=Boton(self.surface,w/3,400,100,30,None,1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Buttons/Button_M_03.png","NIVELES","Comic Sans",C_PINK,20,self.elegir_niveles,"form_level_select")
+        self.boton_elegir_niveles=Boton(self.surface,w/3,400,100,30,None,1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","NIVELES","Comic Sans",C_PINK,20,self.elegir_niveles,"form_level_select")
 
 
     def elegir_niveles(self,parametro):
