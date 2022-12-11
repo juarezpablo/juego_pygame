@@ -14,7 +14,8 @@ class Player:
         '''
         self.walk_r = Auxiliar.getSurfaceFromSpriteSheet("caracters/stink/walk.png",15,1,scale=p_scale)[:12]
         '''
-
+        self.posicion_inicial_x=x
+        self.posicion_inicial_y=y
         self.stay_r = Auxiliar.getSurfaceFromSeparateFiles(PATH_PLAYER_STAY,10,flip=False,scale=p_scale)
         self.stay_l = Auxiliar.getSurfaceFromSeparateFiles(PATH_PLAYER_STAY,10,flip=True,scale=p_scale)
         self.jump_r = Auxiliar.getSurfaceFromSeparateFiles(PATH_PLAYER_JUMP,10,flip=False,scale=p_scale)
@@ -78,7 +79,7 @@ class Player:
 
        # self.lives=[]
         #self.lives=self.generate_lives(5)
-        self.vidas=4    
+        self.vidas=5    
 
         self.estado_player="sano"
         self.bandera_daño=0
@@ -93,10 +94,10 @@ class Player:
         self.score_label=Caja_texto(tablero,500,0,100,50,None,"SCORE","Verdana",C_BLUE_2,35)
         self.score_value=Caja_texto(tablero,650,0,100,50,None,self.score,"Verdana",C_BLUE_2,35)
 
-        self.tiempo_de_juego=0
+        self.tiempo_de_juego=0.00
         self.label_tiempo=Caja_texto(tablero,720,0,100,50,None,"TIME:","Verdana",C_RED,35)
         self.value_tiempo=Caja_texto(tablero,820,0,100,50,None,self.tiempo_de_juego,"Verdana",C_RED,35)
-
+        
     
     '''
 
@@ -266,11 +267,28 @@ class Player:
             else: 
                 self.frame = 0
  
+    def reset(self):
+        self.vidas=5
+        self.estado_player="sano"
+        self.tiempo_de_juego=0
+        self.rect.x=self.posicion_inicial_x
+        self.rect.y=self.posicion_inicial_y
+        self.score=0
+        '''
+        self.collition_rect = pygame.Rect(self.posicion_inicial_x+self.rect.width/3,self.posicion_inicial_y,self.rect.width/3,self.rect.height)
+        self.ground_collition_rect = pygame.Rect(self.collition_rect)
+        self.terreno_colision_izquierda_rect=pygame.Rect(self.rect.x,self.posicion_inicial_y+5,5,self.rect.height-5)
+        self.terreno_colision_derecha_rect=pygame.Rect(self.rect.x+self.collition_rect.width*2,self.posicion_inicial_y+5,5,self.rect.height-5)
+        self.collition_rect = pygame.Rect(self.posicion_inicial_x+self.rect.width/3,self.posicion_inicial_y,self.rect.width/3,self.rect.height)
+        '''
+
     def update(self,delta_ms,plataform_list,tablero_de_gestion):
         if tablero_de_gestion.stage_1.active:
             self.tiempo_de_juego=self.tiempo_de_juego+(delta_ms/1000)
-           # self.tiempo_de_juego=self.tiempo_de_juego/1000
             self.tiempo_de_juego=round(self.tiempo_de_juego,2)
+        elif tablero_de_gestion.stage_2.active:
+            self.tiempo_de_juego=self.tiempo_de_juego+(delta_ms/1000)
+            self.tiempo_de_juego=round(self.tiempo_de_juego,2)    
         self.do_movement(delta_ms,plataform_list)
         self.do_animation(delta_ms)
 

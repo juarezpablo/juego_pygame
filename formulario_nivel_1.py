@@ -8,16 +8,9 @@ class Formulario_level_1(Form):
     def __init__(self,name, master_surface, x, y, w, h, color_background, estado, imagen_background, active,path_nivel_1):
         super().__init__(name,master_surface, x, y, w, h, color_background, estado, imagen_background, active)
         
-        #self.surface=pygame.image.load(imagen_background)
         
-        #self.boton_pausa=Boton(self.surface,w/3,300,100,30,None,1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Buttons/Button_M_03.png","Pause","Comic Sans",C_PINK,20,self.pausa,"form_pause")
-        #self.boton_atras=Boton(self.surface,w/3,500,100,30,None,1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Buttons/arrowLeft.png","","Comic Sans",C_LIGHT_PINK,20,self.menu,"form_menu")
-
-       # self.lista_botones=[]
-       # self.lista_botones=self.lista_botones=[self.boton_pausa,self.boton_atras]
-
-       # self.stage_1=Nivel(10,path_nivel_1,2,self.master_surface,active)
         self.bandera_nivel=0
+        self.bandera_player_reset=0
    
     def pausa(self,parametro):
         self.set_active(parametro)
@@ -33,13 +26,10 @@ class Formulario_level_1(Form):
                         self.pausa("form_pause")      
    
     def update(self,delta_ms,lista_eventos,player_1,tablero_de_gestion):
-      #  for boton in self.lista_botones:
-            #print("botones update")
-       #     boton.update(delta_ms,lista_eventos)
-      #  self.stage_1.update(delta_ms,player_1.municion_list,player_1)
-      #  self.stage_1.draw(self.master_surface,player_1.municion_list)
-      #  self.boton_nivel_1.update(delta_ms,lista_eventos)
-      #  self.boton_atras.update(delta_ms,lista_eventos)
+        if self.bandera_player_reset==0:
+            player_1.reset()
+            self.bandera_player_reset=1
+
         self.evento_pausa(delta_ms,lista_eventos)
         if self.bandera_nivel ==0:
             tablero_de_gestion.stage_1.active=True
@@ -49,12 +39,13 @@ class Formulario_level_1(Form):
             
         elif tablero_de_gestion.stage_1.active==False:
             print("FIN")
+            self.bandera_player_reset=0
             self.menu("form_alias")    
         elif tablero_de_gestion.stage_1.derrota:
-            self.menu("form_derrota")   
+            self.menu("form_derrota")
+        player_1.update(delta_ms,tablero_de_gestion.stage_1.lista_plataformas,tablero_de_gestion) 
+
     def draw(self,delta_ms,player_1,tablero_de_gestion):
-     #   super().draw()
-       # for boton in self.lista_botones:
-       #     boton.draw()             
-        
+    
         tablero_de_gestion.stage_1.draw(tablero_de_gestion.master_surface,player_1.municion_list)
+        player_1.draw(self.master_surface)

@@ -17,6 +17,8 @@ from formulario_pausa import Formulario_pause
 from formulario_ranking import Formulario_rank
 from formulario_nivel_2 import Formulario_level_2
 from formulario_ingreso_nombre import Formulario_ingreso_alias
+from formulario_settings import Formulario_config
+
 
 path_nivel_1="C:/Users/Pablo/Desktop/ProgramacionI/game_eventual/niveles_json/nivel_1.json"
 flags = DOUBLEBUF
@@ -42,7 +44,7 @@ form_pausa=Formulario_pause("form_pause",screen,500,200,600,500,None,1,PATH_IMAG
 form_rankings=Formulario_rank("form_rank",screen,500,200,600,500,None,1,PATH_IMAGE+"gui/jungle/pause/bg.png",False)
 form_level_2=Formulario_level_2("form_nivel_2",screen,0,0,ANCHO_VENTANA,ALTO_VENTANA,None,1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Buttons/Button_M_03.png",False,path_nivel_1)
 form_enter_alias=Formulario_ingreso_alias("form_alias",screen,500,200,600,500,None,1,PATH_IMAGE+"gui/jungle/pause/bg.png",False)
-
+form_settings=Formulario_config("form_settings",screen,400,100,700,600,None,1,PATH_IMAGE+"gui/jungle/pause/bg.png",False)
 
 while True:    
     lista_eventos=pygame.event.get()
@@ -60,18 +62,27 @@ while True:
         formulario_menu.update(delta_ms,lista_eventos)
         formulario_menu.draw()
     elif formulario_seleccion_nivel.active:
+     #  player_1 = Player(x=2,y=0,speed_walk=6,speed_run=12,gravity=14,jump_power=30,frame_rate_ms=100,move_rate_ms=50,jump_height=200,p_scale=0.2,interval_time_jump=300,tablero=screen)
+        tablero_de_gestion.stage_1.bandera_reset=0
+        tablero_de_gestion.stage_2.bandera_reset=0
         formulario_seleccion_nivel.update(delta_ms,lista_eventos,player_1)
         formulario_seleccion_nivel.draw()
+
+    elif form_settings.active:
+        form_settings.update(delta_ms,lista_eventos)
+        form_settings.draw()
+
     elif form_level_1.active:
        #     form_level_1.update(delta_ms,lista_eventos,player_1)
        #    tablero_de_gestion.update(delta_ms,player_1,lista_eventos)
          #   tablero_de_gestion.draw(player_1,delta_ms)
+            tablero_de_gestion.stage_1.reset()
             
             form_level_1.update(delta_ms,lista_eventos,player_1,tablero_de_gestion)
             form_level_1.draw(delta_ms,player_1,tablero_de_gestion)
             player_1.events(delta_ms,keys)
-            player_1.update(delta_ms,tablero_de_gestion.stage_1.lista_plataformas,tablero_de_gestion)
-            player_1.draw(screen)
+          #  player_1.update(delta_ms,tablero_de_gestion.stage_1.lista_plataformas,tablero_de_gestion)
+           # player_1.draw(screen)
 
     elif form_pausa.active:   
         form_pausa.update(delta_ms,lista_eventos)
@@ -91,11 +102,13 @@ while True:
        #     form_level_1.update(delta_ms,lista_eventos,player_1)
        #    tablero_de_gestion.update(delta_ms,player_1,lista_eventos)
          #   tablero_de_gestion.draw(player_1,delta_ms)
+            tablero_de_gestion.stage_2.reset()
+            player_1.reset()
             form_level_2.update(delta_ms,lista_eventos,player_1,tablero_de_gestion)
             form_level_2.draw(delta_ms,player_1,tablero_de_gestion)
             player_1.events(delta_ms,keys)
-            player_1.update(delta_ms,tablero_de_gestion.stage_2.lista_plataformas,tablero_de_gestion)
-            player_1.draw(screen)
+           
+          
 
     #screen.blit(tablero_de_gestion.stage_1.imagen_fondo,tablero_de_gestion.stage_1.rect)
     

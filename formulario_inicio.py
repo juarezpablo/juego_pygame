@@ -9,15 +9,17 @@ class Formulario_inicio(Form):
         
        # self.surface=pygame.image.load(imagen_background)
    
-        self.boton_elegir_niveles=Boton(self.surface,w/3,400,100,30,None,1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","NIVELES","Comic Sans",C_PINK,20,self.elegir_niveles,"form_level_select")
+        self.boton_elegir_niveles=Boton(self.surface,400,300,100,30,None,1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","   JUGAR","Comic Sans",C_PINK,30,self.activar_formulario,"form_level_select")
+        self.boton_settings=Boton(self.surface,(w/2),300,100,30,None,1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","   SETTINGS","Comic Sans",C_PINK,30,self.activar_formulario,"form_settings")
 
-
-    def elegir_niveles(self,parametro):
+    def activar_formulario(self,parametro):
         self.set_active(parametro)
 
     def update(self,delta_ms,lista_eventos):
         self.boton_elegir_niveles.update(delta_ms,lista_eventos)
+        self.boton_settings.update(delta_ms,lista_eventos)
 
     def draw(self):
         super().draw()
-        self.boton_elegir_niveles.draw()                
+        self.boton_elegir_niveles.draw() 
+        self.boton_settings.draw()               

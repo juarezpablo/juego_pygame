@@ -17,12 +17,14 @@ class Formulario_rank(Form):
        # self.widget_tabla=Widget(self.surface,300,200,400,400,None,1,PATH_IMAGE+"gui/jungle/pause/bg.png")
         x_master=x
         y_master=y
-        self.boton_continuar=Pause_Boton(self.surface,w/4,(h/3)+100,50,30,None,1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","CONTINUAR","Comic Sans",C_PINK,20,self.continuar,"form_level_select",x_master,y_master)
+        self.boton_continuar=Pause_Boton(self.surface,w/4,340,50,30,None,1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","CONTINUAR","Comic Sans",C_PINK,20,self.continuar,"form_menu",x_master,y_master)
        # self.boton_atras=Boton(self.surface,w/3,500,100,30,None,1,"C:/Users/Pablo/Desktop/Sprites/images/images/gui/set_gui_01/Pixel_Border/Buttons/arrowLeft.png","","Comic Sans",C_LIGHT_PINK,20,self.atras,"form_menu")
-        self.label_1=Caja_texto(self.surface,20,300,100,30,None,"Name","Comic sans",C_NEGRO,30)
+        self.label_1=Caja_texto(self.surface,15,210,w,30,None,"Name","Comic sans",C_TEXT_RANK_1,30)
+        self.label_2=Caja_texto(self.surface,15,250,w,30,None,"Name","Comic sans",C_TEXT_RANK_2,30)
+        self.label_3=Caja_texto(self.surface,15,290,w,30,None,"Name","Comic sans",C_TEXT_RANK_3,30)
        # self.lista_botones=[]
         self.lista_botones=self.lista_botones=[self.boton_continuar]
-        self.lista_widgets=[self.widget_titulo]
+        self.lista_widgets=[self.widget_titulo,self.label_1,self.label_2,self.label_3]
         
         self.lista_rankings=[]
         
@@ -33,17 +35,36 @@ class Formulario_rank(Form):
         
             lista=[]
             with sqlite3.connect("sqlite/bd_btf.db") as conexion:
-                cursor=conexion.execute("SELECT * FROM personajes")
+                
+                sentencia = "SELECT * FROM personajes ORDER BY score DESC LIMIT 3;"
+                cursor=conexion.execute(sentencia)                        
                 for fila in cursor:
                     print(fila)
                     lista.append(fila)
                 print(lista)    
                 
                 self.lista_rankings=lista
-            
-   
-    def filtrar_mensaje(self):
-        lista_a_procesar=self.lista_rankings
+  
+    def filtrar_mensaje(self,index):
+        mensaje=""
+        nombre=""
+        scor=0
+        tiempo=0
+        lista_a_procesar=self.lista_rankings[:]
+        i=0
+        if len(lista_a_procesar)> index:
+            for item in lista_a_procesar[index]:
+                if i==1:
+                    nombre=item
+                elif i==2:
+                    scor = item
+                elif i==3:
+                    tiempo=item
+                i+=1    
+        print(nombre,scor,tiempo)    
+        mensaje=("  * {0} | Score:{1} | Time:{2}".format(nombre,scor,tiempo))
+        print(mensaje)
+        return mensaje
 
     def continuar(self,parametro):
         self.set_active(parametro)
@@ -57,10 +78,13 @@ class Formulario_rank(Form):
         for boton in self.lista_botones:
             boton.update(delta_ms,lista_eventos)
             
-        for widget in self.lista_widgets:
-            widget.update() 
-        texto=self.filtrar_mensaje()   
+        self.widget_titulo.update() 
+        texto=self.filtrar_mensaje(0)   
         self.label_1.update(delta_ms,texto)
+        texto=self.filtrar_mensaje(1)
+        self.label_2.update(delta_ms,texto)
+        texto=self.filtrar_mensaje(2)
+        self.label_3.update(delta_ms,texto)
       #  self.boton_nivel_1.update(delta_ms,lista_eventos)
       #  self.boton_atras.update(delta_ms,lista_eventos)
 
@@ -71,4 +95,4 @@ class Formulario_rank(Form):
         for widget in self.lista_widgets:
             widget.draw()    
             #print("boton: x:{0} y: {1}".format(boton.rectangulo.x,boton.rectangulo.y))
-        self.label_1.draw()
+        

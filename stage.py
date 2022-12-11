@@ -84,8 +84,8 @@ class Nivel():
         self.tiempo_desde_colision_con_daño=0
         self.tiempo_dañado=2000
         self.bandera_daño=0
-       # self.player_vidas=2
-        #self.player_barra_vida=Barra_progresiva(self.imagen_fondo,1200,50,200,25,C_LIGHT_PINK,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Bars/Bar_Background0{0}.png",1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Bars/Bar_Segment0{0}.png",estilo_punto=1,p_scale=1,valor_a_dibujar=3,valor_max=6,estado="s")
+        self.player_vidas=2
+        self.player_barra_vida=Barra_progresiva(self.imagen_fondo,1200,50,200,25,C_LIGHT_PINK,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Bars/Bar_Background0{0}.png",1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Bars/Bar_Segment0{0}.png",estilo_punto=1,p_scale=1,valor_a_dibujar=3,valor_max=6,estado="s")
         self.score=0
         self.contador_index_enemigo_volador=0
         self.superficie_maestra=master_surface
@@ -95,7 +95,7 @@ class Nivel():
         self.sonido_fondo.set_volume(0.1)
         
         self.tiempo_de_juego=0
-
+        self.bandera_reset=0
 
     def cargar_json(self,path):
         diccionario={}
@@ -109,7 +109,6 @@ class Nivel():
             for elemento in self.datos_clases["clases_de_portales"]:
                 if portal["clase"]==elemento["clase"]:
                     self.lista_portales.append(Portal_meta(x=portal["x"],y=portal["y"],path=PATH_IMAGE+elemento["path"],cant_fotogramas=elemento["cant_fotogramas"],frame_rate_ms=portal["frame_rate_ms"],move_rate_ms=portal["move_rate_ms"],direction=portal["direction"],p_scale=portal["p_scale"]))
-
         return self.lista_portales
 
     def crear_plataformas(self): 
@@ -133,12 +132,8 @@ class Nivel():
         contador_index_botin=0
         contador_index_municion_enemiga=0
         contador_index_bala=0
-
         contador_index_enemigo_estatico=0
         contador_index_enemigo_corredor=0
-
-        
-
 
         for enemigo in self.lista_enemigos:
             enemigo.automatize(delta_ms)
@@ -188,10 +183,22 @@ class Nivel():
         for portal in self.lista_portales:
             portal.update(delta_ms)
 
+    def reset(self):
+        if self.bandera_reset==0:
+            self.lista_botines=self.crear_botines()
+            self.lista_enemigos_voladores=self.crear_enemigos_voladores()
+            self.lista_enemigos_estaticos=self.crear_enemigos_estaticos()
+            self.lista_enemigos_corredores=self.crear_enemigos_corredores()
+            self.active=True
+            self.bandera_reset=1
+       
+
+
     def finalizar_nivel(self,player_1):
         print("FINALIZAR NIVEL")
         self.sonido_fondo.stop()
         self.active=False
+        #self.bandera_reset=0
                 
     def colisiones(self,player_municion_list,player_1,delta_ms):
 
@@ -229,19 +236,12 @@ class Nivel():
                     if enemigo_corredor.direction == DIRECTION_L:
                         enemigo_corredor.direction=DIRECTION_R
 
-
-
-
             if enemigo_corredor.colision_superior_damage_rect.colliderect(player_1.ground_collition_rect):
                 enemigo_corredor.estado=0   
 
             if enemigo_corredor.terreno_colision_derecha_rect.colliderect(player_1.collition_rect) or enemigo_corredor.terreno_colision_izquierda_rect.colliderect(player_1.collition_rect):
                 player_1.estado_player="herido"
                 self.descontar_vida_player(delta_ms,player_1) 
-
-
-
-
 
         for enemigo_estatico in self.lista_enemigos_estaticos:
             for bala in player_municion_list:

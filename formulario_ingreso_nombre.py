@@ -32,6 +32,7 @@ class Formulario_ingreso_alias(Form):
 
         self.score_player=0
         self.vidas_player=0
+        self.tiempo_player=0.00
 
     def crear_db_ranking(self):
         if self.bandera_crear_db==0:
@@ -42,7 +43,7 @@ class Formulario_ingreso_alias(Form):
                                             id integer primary key autoincrement,
                                             nombre text,
                                             score int,
-                                            anio real
+                                            time real
                                     )
                                 '''
                     conexion.execute(sentencia)
@@ -59,7 +60,7 @@ class Formulario_ingreso_alias(Form):
         mensaje=("{0}".format(self.texto))
         with sqlite3.connect("sqlite/bd_btf.db") as conexion:
             try:
-                conexion.execute("insert into personajes(nombre,score,anio) values (?,?,?)", (mensaje,self.score_player,self.vidas_player))
+                conexion.execute("insert into personajes(nombre,score,time) values (?,?,?)", (mensaje,self.score_player,self.tiempo_player))
                
                 conexion.commit()# Actualiza los datos realmente en la tabla
             except:
@@ -75,9 +76,9 @@ class Formulario_ingreso_alias(Form):
                     largo=len(self.texto)
                     
                     #self.texto=self.texto[0:(largo-1)]
-                    self.texto=self.texto[0:(largo-1)] +" "
+                    self.texto=self.texto[:-1] 
                     
-                    self.texto=self.texto[0:(largo-1)] 
+                    
                 else:
                     self.texto+=evento.unicode    
         print(self.texto)
@@ -86,6 +87,7 @@ class Formulario_ingreso_alias(Form):
     def update(self,delta_ms,lista_eventos,player_1):
         self.score_player=player_1.score
         self.vidas_player=player_1.vidas
+        self.tiempo_player=player_1.tiempo_de_juego
         for boton in self.lista_botones:
             boton.update(delta_ms,lista_eventos)
             
