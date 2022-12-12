@@ -177,7 +177,8 @@
                                         ],
 
         "enemigos_estaticos_a_procesar":[{"x": 1300,"y": 310, "clase": "centauro","speed_shoot":2,"frame_rate_ms":200, "move_rate_ms":100,"p_scale":1, "direction":0},
-                                         {"x": 700,"y": 370, "clase": "centauro","speed_shoot":2,"frame_rate_ms":200, "move_rate_ms":100,"p_scale":1, "direction":0}
+                                         {"x": 700,"y": 370, "clase": "centauro","speed_shoot":2,"frame_rate_ms":200, "move_rate_ms":100,"p_scale":1, "direction":0},
+                                         {"x": 870,"y": 210, "clase": "centauro","speed_shoot":2,"frame_rate_ms":200, "move_rate_ms":100,"p_scale":1, "direction":0}
                                         ],
 
         "enemigos_corredores_a_procesar":[{"x": 450,"y": 635, "clase": "dog_bone","speed_walk":3,"frame_rate_ms":80, "move_rate_ms":30,"p_scale":1}
