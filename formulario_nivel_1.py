@@ -5,7 +5,7 @@ from gui_widget import Widget,Boton
 from stage import Nivel
 
 class Formulario_level_1(Form):
-    def __init__(self,name, master_surface, x, y, w, h, color_background, estado, imagen_background, active,path_nivel_1):
+    def __init__(self,name, master_surface, x, y, w, h, color_background, estado, imagen_background, active):
         super().__init__(name,master_surface, x, y, w, h, color_background, estado, imagen_background, active)
         
         
@@ -27,7 +27,7 @@ class Formulario_level_1(Form):
    
     def update(self,delta_ms,lista_eventos,player_1,tablero_de_gestion):
         if self.bandera_player_reset==0:
-            player_1.reset()
+           # player_1.reset()
             self.bandera_player_reset=1
 
         self.evento_pausa(delta_ms,lista_eventos)
@@ -42,6 +42,8 @@ class Formulario_level_1(Form):
             self.bandera_player_reset=0
             self.menu("form_alias")    
         elif tablero_de_gestion.stage_1.derrota:
+            tablero_de_gestion.stage_1.active=False
+            tablero_de_gestion.stage_1.derrota=False
             self.menu("form_derrota")
         player_1.update(delta_ms,tablero_de_gestion.stage_1.lista_plataformas,tablero_de_gestion) 
 

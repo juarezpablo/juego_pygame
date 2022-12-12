@@ -18,7 +18,7 @@ class Formulario_ingreso_alias(Form):
         self.widget_nombre=Caja_texto(self.surface,50,200,w/2,100,None,"Name","Comic sans",C_NEGRO,50)
         x_master=x
         y_master=y
-        self.boton_continuar=Pause_Boton(self.surface,w/4,350,50,30,None,1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","CONTINUAR","Comic Sans",C_PINK,20,self.continuar,"form_rank",x_master,y_master)
+        self.boton_continuar=Pause_Boton(self.surface,w/4,350,50,30,None,1,"Sprites/images/images/gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","CONTINUAR","Comic Sans",C_PINK,20,self.continuar,"form_rank",x_master,y_master)
         
 
        # self.lista_botones=[]

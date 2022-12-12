@@ -5,7 +5,7 @@ from constantes import *
 
 class Bala:
     def __init__(self,x,y,direction,direccion_de_bala,estado_de_bala,speed=10,angulo_y_de_disparo=0) -> None:
-        self.image_sprite = Auxiliar.getSurfaceFromSpriteSheet(PATH_IMAGE+"elements/toy_star_1/toy_star_1.png",15,2,False,1,1)
+        self.image_sprite = Auxiliar.getSurfaceFromSpriteSheet("Sprites/images/images/elements/toy_star_1/toy_star_1.png",15,2,False,1,1)
         self.frame=0
         self.rect=self.image_sprite[self.frame].get_rect()
         self.speed_bullet=speed

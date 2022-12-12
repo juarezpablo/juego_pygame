@@ -4,8 +4,8 @@ from constantes import *
 
 class Bullet:
     def __init__(self,x,y,direction,direccion_de_bala,estado_de_bala,speed=10,angulo_y_de_disparo=0) :
-        self.image_sprite_l = Auxiliar.getSurfaceFromSeparateFiles(PATH_IMAGE+"extras/enemies_extras/bullet/tile{0}.png",2,flip=False)
-        self.image_sprite_r = Auxiliar.getSurfaceFromSeparateFiles(PATH_IMAGE+"extras/enemies_extras/bullet/tile{0}.png",2,flip=True)
+        self.image_sprite_l = Auxiliar.getSurfaceFromSeparateFiles("Sprites/images/images/extras/enemies_extras/bullet/tile{0}.png",2,flip=False)
+        self.image_sprite_r = Auxiliar.getSurfaceFromSeparateFiles("Sprites/images/images/extras/enemies_extras/bullet/tile{0}.png",2,flip=True)
         self.frame=0
         self.animation=self.image_sprite_l
         self.image=self.animation[self.frame]

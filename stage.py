@@ -58,7 +58,7 @@ class Nivel():
 
         self.lista_enemigos=[]
         #self.lista_enemigos=self.crear_enemigos()
-        self.imagen_fondo = pygame.image.load(PATH_IMAGE+"locations/set_bg_05/3_game_background/3_game_background.png").convert()
+        self.imagen_fondo = pygame.image.load("Sprites/images/images/locations/set_bg_05/3_game_background/3_game_background.png").convert()
         self.imagen_fondo = pygame.transform.scale(self.imagen_fondo,(ANCHO_VENTANA,ALTO_VENTANA))
         self.rect=self.imagen_fondo.get_rect()
 
@@ -85,7 +85,7 @@ class Nivel():
         self.tiempo_dañado=2000
         self.bandera_daño=0
         self.player_vidas=2
-        self.player_barra_vida=Barra_progresiva(self.imagen_fondo,1200,50,200,25,C_LIGHT_PINK,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Bars/Bar_Background0{0}.png",1,PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Bars/Bar_Segment0{0}.png",estilo_punto=1,p_scale=1,valor_a_dibujar=3,valor_max=6,estado="s")
+        self.player_barra_vida=Barra_progresiva(self.imagen_fondo,1200,50,200,25,C_LIGHT_PINK,"Sprites/images/images/gui/set_gui_01/Pixel_Border/Bars/Bar_Background0{0}.png",1,"Sprites/images/images/gui/set_gui_01/Pixel_Border/Bars/Bar_Segment0{0}.png",estilo_punto=1,p_scale=1,valor_a_dibujar=3,valor_max=6,estado="s")
         self.score=0
         self.contador_index_enemigo_volador=0
         self.superficie_maestra=master_surface
@@ -122,10 +122,15 @@ class Nivel():
    # def crear_enemigos(self):
        # for item in enemigos_a_procesar:
        #     self.lista_enemigos.append(Enemigo(x=item["x"],y=item["y"],speed_walk=item["speed_walk"],speed_run=item["speed_walk"],gravity=item["gravity"],jump_power=item["jump_power"],frame_rate_ms=item["frame_rate_ms"],move_rate_ms=item["move_rate_ms"],jump_height=item["jump_height"],p_scale=item["p_scale"],interval_time_jump=item["interval_time_jump"]))
-       # return self.lista_enemigos    
-
+       # return self.lista_enemigos
+       # 
+    def setear_sonido(self,on_off=True):  
+        if on_off:  
+            self.sonido_fondo.play(-1)    
+        else:
+            self.sonido_fondo.stop()    
     def update(self,delta_ms,player_municion_list,player_1):
-        self.sonido_fondo.play(-1)
+        
        # self.player_vidas=player_1.vidas
         self.colisiones(player_municion_list,player_1,delta_ms)   
         contador_index=0
@@ -185,10 +190,17 @@ class Nivel():
 
     def reset(self):
         if self.bandera_reset==0:
+            self.lista_botines=[]
             self.lista_botines=self.crear_botines()
+            self.lista_enemigos_voladores=[]
             self.lista_enemigos_voladores=self.crear_enemigos_voladores()
+            self.lista_enemigos_estaticos=[]
             self.lista_enemigos_estaticos=self.crear_enemigos_estaticos()
+            self.lista_enemigos_corredores=[]
             self.lista_enemigos_corredores=self.crear_enemigos_corredores()
+            
+           
+           
             self.active=True
             self.bandera_reset=1
        
@@ -210,8 +222,13 @@ class Nivel():
             for plataforma in self.lista_plataformas:
                 if bala.terreno_colision_rect.colliderect(plataforma.terreno_colision_rect):
                     bala.estado_de_bala="colision_terreno"
-            
-
+                 
+    
+        for plataforma in self.lista_plataformas:
+            if player_1.collition_rect.colliderect(plataforma.terreno_colision_rect) and plataforma.naturaleza=="mortal":
+                player_1.vidas=0
+                
+                self.derrota=True   
 
         for enemigo_volador in self.lista_enemigos_voladores:
             for plataforma in self.lista_plataformas:
@@ -221,7 +238,9 @@ class Nivel():
                 if enemigo_volador.terreno_colision_izquierda_rect.colliderect(plataforma.terreno_colision_rect) and plataforma.naturaleza =="solida" :
                     if enemigo_volador.direction == DIRECTION_L:
                         enemigo_volador.direction=DIRECTION_R
-
+            if enemigo_volador.terreno_colision_derecha_rect.colliderect(player_1.collition_rect) or enemigo_volador.terreno_colision_izquierda_rect.colliderect(player_1.collition_rect):
+                player_1.estado_player="herido"
+                self.descontar_vida_player(delta_ms,player_1)
             for bala in player_municion_list:
                 if enemigo_volador.terreno_colision_izquierda_rect.colliderect(bala.terreno_colision_rect) or enemigo_volador.terreno_colision_derecha_rect.colliderect(bala.terreno_colision_rect):
                     enemigo_volador.estado=0

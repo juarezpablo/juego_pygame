@@ -14,7 +14,7 @@ ALTO_VENTANA = 800
 GROUND_LEVEL = 700
 FPS = 60
 
-PATH_IMAGE = "C:/Users/Pablo/Desktop/Sprites/images/images/"
+PATH_IMAGE = "Sprites/images/images/"
 
 PATH_PLAYER_STAY=PATH_IMAGE+"caracters/players/cowgirl/Idle ({0}).png"
 PATH_PLAYER_JUMP=PATH_IMAGE+"caracters/players/cowgirl/Jump ({0}).png"
