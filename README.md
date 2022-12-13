@@ -9,7 +9,9 @@ Juego realizado en Python utilizando Pygame. Consiste en un player controlado po
 ## Como empezar
 
 ### Prerequisitos
+
 Instalar Anaconda
+
 Instalar visual code
 
 Instalar modulo pygame
