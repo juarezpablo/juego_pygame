@@ -21,14 +21,19 @@ Instalar modulo pygame
 Ejemplos
 ```
 
-### Instalacion
+### Detalles
 
+En la carpeta 
 ```
-
+niveles_json
 ```
+se ubican los archivos json con las configuraciones de cada nivel
 
-
-
+En carpeta
+```
+Sprites
+```
+se encuentran los recursos de imagenes utilizados en el juego
 
 ## Authors
 
