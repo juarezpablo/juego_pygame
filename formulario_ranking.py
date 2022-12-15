@@ -34,7 +34,7 @@ class Formulario_rank(Form):
         self.lista_rankings=[]
         self.lista_textos=self.metodo_generar_coordenadas()
         self.lista_nueva=[]
-        
+        self.largo_lista=0
 
     def metodo_generar_coordenadas(self):
         ancho_total=self.fondo_listado.width
@@ -107,16 +107,21 @@ class Formulario_rank(Form):
        # self.label_titulos.update(delta_ms,msj)
         i_text=0
         self.lista_nueva=self.crear_lista()
-        for texto in self.lista_textos:
+        self.largo_lista=len(self.lista_nueva)
+        for texto in self.lista_textos[:self.largo_lista]:
+          #  if len(self.lista_nueva)== len (self.lista_textos):
             texto.update(delta_ms,self.lista_nueva[i_text])
             i_text+=1
+          #  else:
+           #     texto.update(delta_ms,self.lista_nueva[len])    
 
     def crear_lista(self):
         lista_nueva=[]
         for item in self.lista_rankings:
             for elemento in item:
                 valor=elemento
-                lista_nueva.append(valor)  
+                lista_nueva.append(valor)
+
         print(lista_nueva)
         return lista_nueva        
         
@@ -131,5 +136,5 @@ class Formulario_rank(Form):
             widget.draw()    
             #print("boton: x:{0} y: {1}".format(boton.rectangulo.x,boton.rectangulo.y))
         
-        for texto in self.lista_textos:
+        for texto in self.lista_textos[:self.largo_lista]:
             texto.draw()
