@@ -16,7 +16,7 @@
 
 - Instalar [Anaconda](https://www.anaconda.com/)
 
-- Instalar Visual Studio Code(https://code.visualstudio.com/)
+- Instalar [Visual Studio Code](https://code.visualstudio.com/)
 
 - Instalar modulo pygame:
 
