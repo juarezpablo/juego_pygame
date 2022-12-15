@@ -33,9 +33,9 @@ class Caja_texto:
         
     def render(self,texto):
         self.image_text=self.font_sys.render("{0}".format(texto),True,self.font_color,self.color_background)
-      
+        
 
-      #  self.surface.blit(image_text,(0,self.alto_texto_boton))
+        self.surface.blit(self.image_text,(0,self.alto_texto_boton))
         #print("TEXTO: {0}".format(texto))
 
     def update(self,delta_ms,texto):   

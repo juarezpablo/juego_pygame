@@ -58,7 +58,7 @@ class Barra_progresiva():
 
                
             contador_puntos+=1    
-            print("Vida={0} estado_de_instancia_vida={1}".format(contador_puntos,punto.estado))
+           # print("Vida={0} estado_de_instancia_vida={1}".format(contador_puntos,punto.estado))
 
     def update(self,valor):
 
@@ -87,7 +87,7 @@ class Barra_progresiva():
                 self.master_surface.blit(punto.surface,punto.rectangulo)
               #  self.master_surface.blit(self.surface,self.rectangulo)
               #  print("PUNTOS_ESTADO_1".format(punto.estado))
-                print("IMpreSION DE VIDAS: rect.x={0}  vida.estado={1}".format(punto.x,punto.estado))
+           #     print("IMpreSION DE VIDAS: rect.x={0}  vida.estado={1}".format(punto.x,punto.estado))
        
 
     def generar_coordenadas(self):

@@ -30,11 +30,11 @@ class Boton_animated:
 
     def do_animation(self):
         if self.estado:
-            self.frame=1
-            print("Cambiar a frame1")
+            self.frame=0
+           
         else:
-            self.frame=0   
-            print("Cambiara aframe 0")
+            self.frame=1   
+          
 
     def update(self,delta_ms,lista_eventos):   
         self.do_animation()

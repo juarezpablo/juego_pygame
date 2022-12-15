@@ -181,6 +181,19 @@
             { "x": 1400 ,"y":800 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "solida"},
             { "x": 1450 ,"y":800 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "solida"},
 
+            { "x": 1150 ,"y":750 ,"widht": 50, "height":50,"type":3, "clase":1 ,"naturaleza": "solida"},
+            { "x": 1200 ,"y":750 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1250 ,"y":750 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1300 ,"y":750 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1350 ,"y":750 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1400 ,"y":750 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+
+            { "x": 1200 ,"y":700 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1250 ,"y":700 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1300 ,"y":700 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1350 ,"y":700 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1400 ,"y":700 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+
              { "x": 1450 ,"y":600 ,"widht": 50, "height":50,"type":3, "clase":1 ,"naturaleza": "solida"},      
 
            

@@ -24,29 +24,10 @@ from gui_caja_texto import Caja_texto
 
 
 
-'''
-"stage_1":{
-    "plataformas":
-        [
-            {  "x": 450 ,"y":500 ,"widht": 50, "height":50,"type":2},
-            { "x": 450 ,"y":500 ,"widht": 50, "height":50,"type":2}
-        ],
-    "enemigos":
-        {
-        "volador": [{},{}]
-        "estaticos": [{},{}]  
-        }  {"x": 1300,"y": 600, "clase": "dog_bone","speed_walk":3,"frame_rate_ms":80, "move_rate_ms":30,"p_scale":1}
-    }
-'''
-
-
-                    
-#clases_de_portales=[{"clase":"portal_1", "path": PATH_IMAGE+"extras/elements/portal/portal-stay/tile{0}.png", "cant_fotogramas":15},]
-
 
 
 class Nivel():
-    def __init__(self,cantidad_enemigos,path,cant_plataformas=10,key_stage=2,master_surface=1,active=False):
+    def __init__(self,cantidad_enemigos,path,cant_plataformas=10,key_stage=2,master_surface=1,active=False,path_img_fondo=""):
         pygame.mixer.init()
         self.datos_json=self.cargar_json(path)
         self.datos_clases=self.datos_json["clases"]
@@ -58,7 +39,7 @@ class Nivel():
 
         self.lista_enemigos=[]
         #self.lista_enemigos=self.crear_enemigos()
-        self.imagen_fondo = pygame.image.load("Sprites/images/images/locations/set_bg_05/3_game_background/3_game_background.png").convert()
+        self.imagen_fondo = pygame.image.load(path_img_fondo).convert()
         self.imagen_fondo = pygame.transform.scale(self.imagen_fondo,(ANCHO_VENTANA,ALTO_VENTANA))
         self.rect=self.imagen_fondo.get_rect()
 
@@ -91,12 +72,18 @@ class Nivel():
         self.superficie_maestra=master_surface
         self.active=active
         self.derrota=False
-        self.sonido_fondo=pygame.mixer.Sound("sounds/fondo.mp3")
-        self.sonido_fondo.set_volume(0.1)
+        self.sonido_fondo=pygame.mixer.Sound("sounds/bits_fondo.mp3")
+         
+        #self.musica_fondo=pygame.mixer.music.load("sounds/bits_fondo.mp3")
         
+        self.delta_volumen=0.1
+        self.sonido_fondo.set_volume(self.delta_volumen)
+        self.sonido_coin=pygame.mixer.Sound("sounds/coin.mp3")
         self.tiempo_de_juego=0
         self.bandera_reset=0
-
+        self.sonido_herido_player=pygame.mixer.Sound("sounds/herido_player.mp3")
+        self.lista_sonidos=[self.sonido_coin,self.sonido_herido_player]
+        
     def cargar_json(self,path):
         diccionario={}
         with open(path,"r",encoding="utf8") as archivo:
@@ -125,10 +112,17 @@ class Nivel():
        # return self.lista_enemigos
        # 
     def setear_sonido(self,on_off=True):  
-        if on_off:  
-            self.sonido_fondo.play(-1)    
+        
+        if on_off:      
+            SET_MUSIC=True
         else:
-            self.sonido_fondo.stop()    
+            SET_MUSIC=False
+
+    def set_volumen(self,delta_volumen):
+        for sonido in self.lista_sonidos:
+            sonido.set_volume(self.delta_volumen)
+        #self.musica_fondo.set_volume(self.delta_volumen)
+
     def update(self,delta_ms,player_municion_list,player_1):
         
        # self.player_vidas=player_1.vidas
@@ -187,6 +181,7 @@ class Nivel():
         #self.player_barra_vida.update(self.player_vidas)
         for portal in self.lista_portales:
             portal.update(delta_ms)
+        self.set_volumen(S_VOL)    
 
     def reset(self):
         if self.bandera_reset==0:
@@ -222,6 +217,7 @@ class Nivel():
             for plataforma in self.lista_plataformas:
                 if bala.terreno_colision_rect.colliderect(plataforma.terreno_colision_rect):
                     bala.estado_de_bala="colision_terreno"
+
                  
     
         for plataforma in self.lista_plataformas:
@@ -241,9 +237,11 @@ class Nivel():
             if enemigo_volador.terreno_colision_derecha_rect.colliderect(player_1.collition_rect) or enemigo_volador.terreno_colision_izquierda_rect.colliderect(player_1.collition_rect):
                 player_1.estado_player="herido"
                 self.descontar_vida_player(delta_ms,player_1)
+
             for bala in player_municion_list:
                 if enemigo_volador.terreno_colision_izquierda_rect.colliderect(bala.terreno_colision_rect) or enemigo_volador.terreno_colision_derecha_rect.colliderect(bala.terreno_colision_rect):
                     enemigo_volador.estado=0
+                    bala.estado_de_bala="colision_terreno"
 
 
         for enemigo_corredor in self.lista_enemigos_corredores:
@@ -254,7 +252,10 @@ class Nivel():
                 if enemigo_corredor.terreno_colision_izquierda_rect.colliderect(plataforma.terreno_colision_rect) and plataforma.naturaleza =="solida" :
                     if enemigo_corredor.direction == DIRECTION_L:
                         enemigo_corredor.direction=DIRECTION_R
-
+            for bala in player_municion_list:   
+                  if enemigo_corredor.terreno_colision_derecha_rect.colliderect(bala.terreno_colision_rect) or enemigo_corredor.terreno_colision_izquierda_rect.colliderect(bala.terreno_colision_rect):          
+                        enemigo_corredor.estado=0 
+                        bala.estado_de_bala="colision_terreno"
             if enemigo_corredor.colision_superior_damage_rect.colliderect(player_1.ground_collition_rect):
                 enemigo_corredor.estado=0   
 
@@ -283,6 +284,7 @@ class Nivel():
                     municion_enemiga.estado_de_bala="colision_terreno"
             if municion_enemiga.terreno_colision_rect.colliderect(player_1.collition_rect): 
              #   player_1.vidas=player_1.vidas-1 
+                municion_enemiga.estado_de_bala="colision_terreno"    
                 player_1.estado_player="herido"
                 self.descontar_vida_player(delta_ms,player_1) 
             #print("VIDAS: {0}".format(player_1.vidas))    
@@ -290,11 +292,16 @@ class Nivel():
             if player_1.collition_rect.colliderect(botin.colision_rect):
                 botin.estado=0        
                 player_1.score+=10
-                print("SCORE: {0}".format(player_1.score))    
+               # print("SCORE: {0}".format(player_1.score))  
+                print(SET_MUSIC)
+              #  if SET_MUSIC:  
+                self.sonido_coin.play(1)
 
 
     def descontar_vida_player(self,delta_ms,player_1):
         self.tiempo_dañado=500
+       # if SET_MUSIC:
+        self.sonido_herido_player.play()
         
         self.tiempo_desde_colision_con_daño+=delta_ms
         #print("DELTA_MS {0}".format(self.tiempo_desde_colision))

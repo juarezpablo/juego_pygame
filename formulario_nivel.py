@@ -12,10 +12,10 @@ class Formulario_level(Form):
         #self.surface=pygame.image.load(imagen_background)
         self.widget_titulo=Widget(self.surface,w/4,50,w/2,200,None,1,"Sprites/images/images/gui/jungle/level_select/header.png")
         self.widget_titulo.surface=pygame.transform.scale(self.widget_titulo.surface,(w/2,200))
-        self.boton_nivel_1=Boton(self.surface,w/3,300,100,30,None,1,"Sprites/images/images/gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","Nivel 1","Comic Sans",C_PINK,20,self.elegir_nivel,"form_nivel_1")
+        self.boton_nivel_1=Boton(self.surface,w/3,300,100,30,None,1,"Sprites/images/images/gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","    NIVEL 1","Comic Sans",C_PINK,20,self.elegir_nivel,"form_nivel_1")
         self.boton_atras=Boton(self.surface,w/3,600,100,30,None,1,"Sprites/images/images/gui/set_gui_01/Pixel_Border/Buttons/arrowLeft.png","","Comic Sans",C_LIGHT_PINK,20,self.atras,"form_menu")
-        self.boton_nivel_2=Boton(self.surface,w/3,450,100,30,None,1,"Sprites/images/images/gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","Nivel 2","Comic Sans",C_PINK,20,self.elegir_nivel,"form_nivel_2")
-        self.boton_nivel_3=Boton(self.surface,(w/3)+350,300,100,30,None,1,"Sprites/images/images/gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","Nivel 3","Comic Sans",C_PINK,20,self.elegir_nivel,"form_nivel_3")
+        self.boton_nivel_2=Boton(self.surface,w/3,450,100,30,None,1,"Sprites/images/images/gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","    NIVEL 2","Comic Sans",C_PINK,20,self.elegir_nivel,"form_nivel_2")
+        self.boton_nivel_3=Boton(self.surface,(w/3)+350,300,100,30,None,1,"Sprites/images/images/gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","    NIVEL 3","Comic Sans",C_PINK,20,self.elegir_nivel,"form_nivel_3")
        # self.lista_botones=[]
         self.lista_botones=self.lista_botones=[self.boton_nivel_1,self.boton_atras,self.boton_nivel_2,self.boton_nivel_3]
       #  self.form_level_1=Formulario_level_1("form_nivel_1",self.master_surface,0,0,ANCHO_VENTANA,ALTO_VENTANA,None,1,"C:/Users/Pablo/Desktop/Sprites/images/images/gui/set_gui_01/Pixel_Border/Buttons/Button_M_03.png",False,path_nivel_1)

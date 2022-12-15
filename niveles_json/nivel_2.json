@@ -126,12 +126,12 @@
             { "x": 800 ,"y":750 ,"widht": 50, "height":50,"type":5, "clase":1 ,"naturaleza": "solida"},
         
              
-            { "x": 850 ,"y":700 ,"widht": 50, "height":50,"type":16, "clase":3 ,"naturaleza": "pisable"},
-            { "x": 900 ,"y":700 ,"widht": 50, "height":50,"type":16, "clase":3 ,"naturaleza": "pisable"},
-            { "x": 950 ,"y":700 ,"widht": 50, "height":50,"type":16, "clase":3 ,"naturaleza": "pisable"},
-            { "x": 1000 ,"y":700 ,"widht": 50, "height":50,"type":16, "clase":3 ,"naturaleza": "pisable"},
-            { "x": 1050 ,"y":700 ,"widht": 50, "height":50,"type":16, "clase":3 ,"naturaleza": "pisable"},
-            { "x": 1100 ,"y":700 ,"widht": 50, "height":50,"type":16, "clase":3 ,"naturaleza": "pisable"},
+            { "x": 850 ,"y":700 ,"widht": 50, "height":50,"type":16, "clase":3 ,"naturaleza": "mortal"},
+            { "x": 900 ,"y":700 ,"widht": 50, "height":50,"type":16, "clase":3 ,"naturaleza": "mortal"},
+            { "x": 950 ,"y":700 ,"widht": 50, "height":50,"type":16, "clase":3 ,"naturaleza": "mortal"},
+            { "x": 1000 ,"y":700 ,"widht": 50, "height":50,"type":16, "clase":3 ,"naturaleza": "mortal"},
+            { "x": 1050 ,"y":700 ,"widht": 50, "height":50,"type":16, "clase":3 ,"naturaleza": "mortal"},
+            { "x": 1100 ,"y":700 ,"widht": 50, "height":50,"type":16, "clase":3 ,"naturaleza": "mortal"},
                
             { "x": 850 ,"y":750 ,"widht": 50, "height":50,"type":17, "clase":3 ,"naturaleza": "pisable"},
             { "x": 900 ,"y":750 ,"widht": 50, "height":50,"type":17, "clase":3 ,"naturaleza": "pisable"},
@@ -157,6 +157,18 @@
             { "x": 1450 ,"y":750 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "solida"},
             { "x": 1400 ,"y":800 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "solida"},
             { "x": 1450 ,"y":800 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "solida"},
+
+           
+            { "x": 1150 ,"y":750 ,"widht": 50, "height":50,"type":3, "clase":1 ,"naturaleza": "solida"},
+            { "x": 1200 ,"y":700 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1250 ,"y":700 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1300 ,"y":700 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1350 ,"y":700 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1200 ,"y":750 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1250 ,"y":750 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1300 ,"y":750 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+            { "x": 1350 ,"y":750 ,"widht": 50, "height":50,"type":4, "clase":1 ,"naturaleza": "pisable"},
+
 
              { "x": 1450 ,"y":600 ,"widht": 50, "height":50,"type":3, "clase":1 ,"naturaleza": "solida"},      
 

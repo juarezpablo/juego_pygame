@@ -44,13 +44,14 @@ class Boton(Widget):
         self.on_click=on_click
         self.on_click_param=on_click_param
         self.alto_texto_boton=self.rectangulo.height/3
-
+        
         
     def render(self):
         image_text=self.font_sys.render(self.text,True,self.font_color,self.color_background)
       #  if self.image_background == "no":
        #     self.surface.fill(self.color_background)
-
+       # ancho_texto_boton=(self.width/2)-((image_text.get_rect().width)/2)
+      #  alto_texto_boton=(self.height/2)-((image_text.get_rect().height)/2)
         self.surface.blit(image_text,(10,self.alto_texto_boton))
      #   print("{0}".format(image_text.width))
 

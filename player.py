@@ -91,14 +91,14 @@ class Player:
         self.tiempo_desde_creacion=0
         self.bandera_recarga=0
         self.score=0
-        self.score_label=Caja_texto(tablero,500,0,100,50,None,"SCORE","Verdana",C_BLUE_2,35)
+        self.score_label=Caja_texto(tablero,500,0,100,50,None,"SCORE: ","Verdana",C_BLUE_2,35)
         self.score_value=Caja_texto(tablero,650,0,100,50,None,self.score,"Verdana",C_BLUE_2,35)
 
-        self.tiempo_de_juego=0.00
-        self.label_tiempo=Caja_texto(tablero,720,0,100,50,None,"TIME:","Verdana",C_RED,35)
-        self.value_tiempo=Caja_texto(tablero,820,0,100,50,None,self.tiempo_de_juego,"Verdana",C_RED,35)
+        self.tiempo_de_juego=0.0
+        self.label_tiempo=Caja_texto(tablero,730,0,100,50,None,"TIME: ","Verdana",C_RED,35)
+        self.value_tiempo=Caja_texto(tablero,830,0,100,50,None,self.tiempo_de_juego,"Verdana",C_RED,35)
         self.reset=False
-    
+        self.sonido_tiro=pygame.mixer.Sound("sounds/disparo_1.mp3")
     '''
 
     def generate_lives(self,cant):
@@ -141,6 +141,7 @@ class Player:
         #print("DELTA_MS {0}".format(self.tiempo_desde_colision))
         if  self.bandera_recarga==0 :
             self.municion_list.append(Bala(self.rect.x,self.rect.y+(self.rect.height/3),self.direction,self.direccion_bala,estado_de_bala="disparada",speed=10,angulo_y_de_disparo=self.angulo_y_de_disparo))
+            self.sonido_tiro.play()
             self.bandera_recarga=1
             #self.tiempo_recarga_enemigos=0
            
@@ -292,10 +293,10 @@ class Player:
 
         print("VIDAS: {0}".format(self.vidas))
 
-        self.score_label.update(delta_ms,"SCORE")
+        self.score_label.update(delta_ms,"SCORE:")
         self.score_value.update(delta_ms,self.score)
         self.value_tiempo.update(delta_ms,self.tiempo_de_juego)
-        self.label_tiempo.update(delta_ms,"TIME:")
+        self.label_tiempo.update(delta_ms,"TIME: ")
 
     def descontar_vida(self,delta_ms):
         self.tiempo_danado=2500
