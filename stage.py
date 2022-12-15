@@ -59,7 +59,7 @@ class Nivel():
         self.municion_enemiga=[]
         self.tiempo_recarga_enemigos=0
         self.tiempo_desde_colision=0
-
+        self.lista_elementos=[self.lista_plataformas,self.lista_botines,self.lista_enemigos_corredores,self.lista_enemigos_estaticos,self.lista_enemigos_voladores,self.lista_portales]
         self.bandera=0
 
         self.tiempo_desde_colision_con_daño=0
@@ -112,7 +112,6 @@ class Nivel():
        # return self.lista_enemigos
        # 
     def setear_sonido(self,on_off=True):  
-        
         if on_off:      
             SET_MUSIC=True
         else:
@@ -156,8 +155,6 @@ class Nivel():
            if enemigo_volador.estado==0:
                 self.lista_enemigos_voladores.pop(self.contador_index_enemigo_volador)
             #self.contador_index_enemigo_volador+=1    
-           
-           
            enemigo_volador.update(delta_ms)
 
         for enemigo_estatico in self.lista_enemigos_estaticos:
@@ -193,9 +190,6 @@ class Nivel():
             self.lista_enemigos_estaticos=self.crear_enemigos_estaticos()
             self.lista_enemigos_corredores=[]
             self.lista_enemigos_corredores=self.crear_enemigos_corredores()
-            
-           
-           
             self.active=True
             self.bandera_reset=1
        
@@ -216,9 +210,7 @@ class Nivel():
         for bala in player_municion_list:
             for plataforma in self.lista_plataformas:
                 if bala.terreno_colision_rect.colliderect(plataforma.terreno_colision_rect):
-                    bala.estado_de_bala="colision_terreno"
-
-                 
+                    bala.estado_de_bala="colision_terreno"             
     
         for plataforma in self.lista_plataformas:
             if player_1.collition_rect.colliderect(plataforma.terreno_colision_rect) and plataforma.naturaleza=="mortal":
@@ -284,9 +276,10 @@ class Nivel():
                     municion_enemiga.estado_de_bala="colision_terreno"
             if municion_enemiga.terreno_colision_rect.colliderect(player_1.collition_rect): 
              #   player_1.vidas=player_1.vidas-1 
-                municion_enemiga.estado_de_bala="colision_terreno"    
+                    
                 player_1.estado_player="herido"
-                self.descontar_vida_player(delta_ms,player_1) 
+                self.descontar_vida_player(delta_ms,player_1)
+               # municion_enemiga.estado_de_bala="colision_terreno" 
             #print("VIDAS: {0}".format(player_1.vidas))    
         for botin in self.lista_botines:
             if player_1.collition_rect.colliderect(botin.colision_rect):
@@ -295,14 +288,13 @@ class Nivel():
                # print("SCORE: {0}".format(player_1.score))  
                 print(SET_MUSIC)
               #  if SET_MUSIC:  
-                self.sonido_coin.play(1)
+                self.sonido_coin.play()
 
 
     def descontar_vida_player(self,delta_ms,player_1):
-        self.tiempo_dañado=500
+        self.tiempo_dañado=400
        # if SET_MUSIC:
-        self.sonido_herido_player.play()
-        
+        self.sonido_herido_player.play()     
         self.tiempo_desde_colision_con_daño+=delta_ms
         #print("DELTA_MS {0}".format(self.tiempo_desde_colision))
         if  self.bandera_daño==0 :
@@ -329,6 +321,12 @@ class Nivel():
 
     def draw(self,screen,player_municion_list):
         screen.blit(self.imagen_fondo,self.rect)
+        '''
+        for bala in player_municion_list:
+            bala.draw(screen)
+        for municion in self.municion_enemiga:
+            municion.draw(screen)  
+        '''      
         for plataforma in self.lista_plataformas:
             plataforma.draw(screen) 
 
@@ -337,7 +335,6 @@ class Nivel():
 
         for botin in self.lista_botines:
             botin.draw(screen)
-
 
         for enemigo in self.lista_enemigos:
             enemigo.draw(screen)          
@@ -357,8 +354,11 @@ class Nivel():
 
         for portal in self.lista_portales:
             portal.draw(screen)
-
-   
+        '''
+        for lista in self.lista_elementos:
+            for elemento in lista:
+                elemento.draw(screen)
+        '''
        # self.player_barra_vida.draw()
 
     def crear_enemigos_voladores(self):
@@ -378,8 +378,6 @@ class Nivel():
         return self.lista_enemigos_corredores
 
 
-
-
     def crear_enemigos_estaticos(self):
         for enemigo in self.datos_enemigos["enemigos_estaticos_a_procesar"]:
             for tipo_clase in self.datos_clases["clases_de_enemigos"]:
@@ -393,9 +391,6 @@ class Nivel():
         #print("Tiempo RECARGA ENEMY {0}".format(self.tiempo_recarga_enemigos))
         self.tiempo_desde_colision+=delta_ms
         print("DELTA_MS {0}".format(self.tiempo_desde_colision))
-
-        
-
         if  self.bandera==0 :
             self.municion_enemiga.append(Bullet(x,y,direction,direction,estado_de_bala="disparada",speed=5,angulo_y_de_disparo=y))
             self.bandera=1

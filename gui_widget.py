@@ -52,7 +52,7 @@ class Boton(Widget):
        #     self.surface.fill(self.color_background)
        # ancho_texto_boton=(self.width/2)-((image_text.get_rect().width)/2)
       #  alto_texto_boton=(self.height/2)-((image_text.get_rect().height)/2)
-        self.surface.blit(image_text,(10,self.alto_texto_boton))
+        self.surface.blit(image_text,( 10,self.alto_texto_boton))
      #   print("{0}".format(image_text.width))
 
     def update(self,delta_ms,lista_eventos):   

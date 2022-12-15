@@ -141,8 +141,10 @@ class Player:
         #print("DELTA_MS {0}".format(self.tiempo_desde_colision))
         if  self.bandera_recarga==0 :
             self.municion_list.append(Bala(self.rect.x,self.rect.y+(self.rect.height/3),self.direction,self.direccion_bala,estado_de_bala="disparada",speed=10,angulo_y_de_disparo=self.angulo_y_de_disparo))
-            self.sonido_tiro.play()
+           # self.sonido_tiro.play()
             self.bandera_recarga=1
+          #  if SET_MUSIC:
+            self.sonido_tiro.play(1)
             #self.tiempo_recarga_enemigos=0
            
         if self.tiempo_desde_creacion>self.tiempo_de_recarga:
@@ -264,21 +266,7 @@ class Player:
                 #print(self.frame)
             else: 
                 self.frame = 0
-        '''
-    def reset(self):
-        self.vidas=5
-        self.estado_player="sano"
-        self.tiempo_de_juego=0
-        self.rect.x=self.posicion_inicial_x
-        self.rect.y=self.posicion_inicial_y
-        self.score=0
-        
-        self.collition_rect = pygame.Rect(self.posicion_inicial_x+self.rect.width/3,self.posicion_inicial_y,self.rect.width/3,self.rect.height)
-        self.ground_collition_rect = pygame.Rect(self.collition_rect)
-        self.terreno_colision_izquierda_rect=pygame.Rect(self.rect.x,self.posicion_inicial_y+5,5,self.rect.height-5)
-        self.terreno_colision_derecha_rect=pygame.Rect(self.rect.x+self.collition_rect.width*2,self.posicion_inicial_y+5,5,self.rect.height-5)
-        self.collition_rect = pygame.Rect(self.posicion_inicial_x+self.rect.width/3,self.posicion_inicial_y,self.rect.width/3,self.rect.height)
-        '''
+     
 
     def update(self,delta_ms,plataform_list,tablero_de_gestion):
         if tablero_de_gestion.stage_1.active or tablero_de_gestion.stage_2.active or tablero_de_gestion.stage_3.active:
@@ -291,7 +279,7 @@ class Player:
 
         self.barra_de_vida.update(self.vidas)
 
-        print("VIDAS: {0}".format(self.vidas))
+        #print("VIDAS: {0}".format(self.vidas))
 
         self.score_label.update(delta_ms,"SCORE:")
         self.score_value.update(delta_ms,self.score)
@@ -303,9 +291,6 @@ class Player:
         #print("Tiempo RECARGA ENEMY {0}".format(self.tiempo_recarga_enemigos))
         self.tiempo_desde_colision+=delta_ms
         #print("DELTA_MS {0}".format(self.tiempo_desde_colision))
-
-        
-
         if  self.bandera_daño==0 :
             self.vidas=self.vidas-1
             self.bandera=1

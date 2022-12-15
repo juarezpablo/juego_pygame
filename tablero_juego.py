@@ -32,7 +32,6 @@ class Tablero:
     def setear_sonido(self,on_off=True):
         
         for nivel in self.lista_niveles:
-            
             nivel.setear_sonido(on_off)
             
                 

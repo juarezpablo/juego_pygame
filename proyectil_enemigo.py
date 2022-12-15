@@ -33,13 +33,6 @@ class Bullet:
             pygame.draw.rect(screen,color=C_PINK,rect=self.terreno_colision_rect)
         
 
-    
-
-            
-            
-
-            
-        
 
 
     #def mov_y(self):

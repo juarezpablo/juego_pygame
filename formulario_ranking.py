@@ -57,7 +57,7 @@ class Formulario_rank(Form):
             lista=[("Nombre","Score","Time")]
             with sqlite3.connect("sqlite/bd_btf.db") as conexion:
                 
-                sentencia = "SELECT * FROM personajes ORDER BY score DESC LIMIT 3;"
+                sentencia = "SELECT * FROM personajes ORDER BY score DESC, time ASC LIMIT 3;"
                 cursor=conexion.execute(sentencia)                        
                 for fila in cursor:
                     print(fila)

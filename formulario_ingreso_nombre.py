@@ -18,13 +18,11 @@ class Formulario_ingreso_alias(Form):
         self.widget_titulo.surface=pygame.transform.scale(self.widget_titulo.surface,(w,200))
        # self.widget_tabla=Widget(self.surface,300,200,400,400,None,1,PATH_IMAGE+"gui/jungle/pause/bg.png")
         self.widget_nombre=Caja_texto(self.surface,50,200,w/2,100,None,"Name","Comic sans",C_NEGRO,50)
-       
         x_master=x
         y_master=y
         self.boton_continuar=Pause_Boton(self.surface,w/4,350,50,30,None,1,"Sprites/images/images/gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png","    CONTINUAR","Comic Sans",C_PINK,30,self.continuar,"form_rank",x_master,y_master)
         
         self.txt1 = TextBox_2(master=self,x=50,y=200,w=w-100,h=70,color_background=None,color_border=None,image_background=PATH_IMAGE+"gui/set_gui_01/Pixel_Border/Buttons/Button_M_01.png",text="Ingresa tu nombre",font="Verdana",font_size=30,font_color=C_NEGRO)
-
        # self.lista_botones=[]
         self.lista_botones=self.lista_botones=[self.boton_continuar]
         self.lista_widgets=[self.widget_titulo]
@@ -76,20 +74,16 @@ class Formulario_ingreso_alias(Form):
   #  def atras(self,parametro):
     ##    self.set_active(parametro)
     def extraer_texto(self,lista_eventos):
-        bandera_leer=0
+        
         for evento in lista_eventos:
-            if evento.type== pygame.KEYDOWN:
-                if bandera_leer==0:
-                    if evento.key== pygame.K_BACKSPACE:
-                        largo=len(self.texto)
-                    
-                        #self.texto=self.texto[0:(largo-1)]
-                        self.texto=self.texto[:-1] 
-                    
-                    
-                    else:
-                        self.texto+=evento.unicode    
-        print(self.texto)
+            if evento.type== pygame.KEYDOWN:               
+                if evento.key== pygame.K_BACKSPACE:
+                    largo=len(self.texto)
+                    #self.texto=self.texto[0:(largo-1)]
+                    self.texto=self.texto[:-1] 
+                else:
+                    self.texto+=evento.unicode    
+        #print(self.texto)
         
         
 
@@ -103,11 +97,7 @@ class Formulario_ingreso_alias(Form):
         for widget in self.lista_widgets:
             widget.update()
         self.extraer_texto(lista_eventos)   
-         
-        self.widget_nombre.update(delta_ms,self.texto)        
-        
-      #  self.boton_nivel_1.update(delta_ms,lista_eventos)
-      #  self.boton_atras.update(delta_ms,lista_eventos)
+        self.widget_nombre.update(delta_ms,self.texto)   
         self.txt1.update(lista_eventos)
 
     def draw(self):
