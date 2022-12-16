@@ -15,6 +15,7 @@
 ### Prerequisitos
 
 - Instalar [Anaconda](https://www.anaconda.com/)
+   >Para sistemas operativos con windows 7 se debe utilizar el archivo del siguiente [directorio](https://repo.anaconda.com/archive) se recomienda la version 2019.07 
 
 - Instalar [Visual Studio Code](https://code.visualstudio.com/)
 
