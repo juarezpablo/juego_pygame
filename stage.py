@@ -268,7 +268,10 @@ class Nivel():
                 #print(enemigo_estatico.rect.x)
                 enemigo_estatico.shoot(on_off = True)
             else:
-                enemigo_estatico.shoot(on_off=False)    
+                enemigo_estatico.shoot(on_off=False)   
+            if player_1.collition_rect.colliderect(enemigo_estatico.rect):
+                player_1.estado_player="herido"
+                self.descontar_vida_player(delta_ms,player_1)     
         
         for municion_enemiga in self.municion_enemiga:
             for plataforma in self.lista_plataformas:

@@ -79,7 +79,7 @@ class Player:
 
        # self.lives=[]
         #self.lives=self.generate_lives(5)
-        self.vidas=5    
+        self.vidas=6    
 
         self.estado_player="sano"
         self.bandera_daño=0
